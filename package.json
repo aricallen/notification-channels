@@ -1,6 +1,6 @@
 {
   "name": "@solstice.sebastian/notification-channels",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -27,5 +27,14 @@
   },
   "author": "solstice.sebastian",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {
+    "@solstice.sebastian/constants": "^1.0.2",
+    "@solstice.sebastian/db-client": "^1.0.0",
+    "@solstice.sebastian/emailer": "^1.0.0",
+    "@solstice.sebastian/logger": "^0.0.2",
+    "dotenv": "^6.0.0",
+    "node-notifier": "^5.2.1",
+    "twilio": "^3.17.1",
+    "ws": "^5.2.0"
+  }
 }
