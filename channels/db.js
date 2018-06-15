@@ -1,6 +1,6 @@
 require('dotenv').config();
-const NotificationChannel = require('@solstice.sebastian/notification-channel');
-const { getClient } = require('../modules/db-client.js');
+const { getClient } = require('@solstice.sebastian/db-client');
+const NotificationChannel = require('../index.js');
 
 const { DB_NAME, NOTIFICATION_DB_NAME } = process.env;
 

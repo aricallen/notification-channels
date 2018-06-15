@@ -1,7 +1,7 @@
 require('dotenv').config();
+const Constants = require('@solstice.sebastian/constants');
 const WebSocket = require('ws');
-const NotificationChannel = require('@solstice.sebastian/notification-channel');
-const Constants = require('../common/constants.js');
+const NotificationChannel = require('../index.js');
 
 const { WS_USERNAME, WS_PASSWORD } = process.env;
 
@@ -17,16 +17,24 @@ class WsChannel extends NotificationChannel {
     this.wsServer.on('listening', this.onListening.bind(this));
   }
 
-  send({ text, ticker, analytic }) {
+  /**
+   * @param {String} text
+   * @param {Ticker} ticker
+   * @param {Any} data
+   */
+  send({ text, ticker, data }) {
     const tickerRecord = ticker.toRecord();
-    const analyticRecord = analytic.toRecord();
+    let dataRecord = data;
+    if (typeof data.toRecord === 'function') {
+      dataRecord = data.toRecord();
+    }
     this.wsServer.clients.forEach((client) => {
       if (client.readyState === Constants.ws.readyStates.OPEN) {
         client.send(
           JSON.stringify({
             text,
             ticker: tickerRecord,
-            analytic: analyticRecord,
+            data: dataRecord,
           })
         );
       }

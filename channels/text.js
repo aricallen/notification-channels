@@ -1,6 +1,6 @@
 require('dotenv').config();
 const twilio = require('twilio');
-const NotificationChannel = require('@solstice.sebastian/notification-channel');
+const NotificationChannel = require('../index.js');
 
 const { TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TEXT_RECIPIENT, TWILIO_NUMBER } = process.env;
 

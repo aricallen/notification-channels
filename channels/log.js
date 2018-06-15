@@ -1,5 +1,5 @@
-const NotificationChannel = require('@solstice.sebastian/notification-channel');
-const Logger = require('../modules/logger.js');
+const NotificationChannel = require('../index.js');
+const Logger = require('@solstice.sebastian/logger');
 
 class LogChannel extends NotificationChannel {
   constructor({ path = 'notifications.log' } = {}) {

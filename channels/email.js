@@ -1,6 +1,6 @@
 require('dotenv').config();
-const NotificationChannel = require('@solstice.sebastian/notification-channel');
-const Emailer = require('../modules/emailer.js');
+const NotificationChannel = require('../index.js');
+const Emailer = require('@solstice.sebastian/emailer');
 
 const u = process.env.EMAIL_USERNAME;
 const p = process.env.EMAIL_PASSWORD;

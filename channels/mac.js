@@ -1,5 +1,5 @@
 const { NotificationCenter } = require('node-notifier');
-const NotificationChannel = require('@solstice.sebastian/notification-channel');
+const NotificationChannel = require('../index.js');
 
 class MacChannel extends NotificationChannel {
   constructor() {
