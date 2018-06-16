@@ -17,6 +17,10 @@ class WsChannel extends NotificationChannel {
     this.wsServer.on('listening', this.onListening.bind(this));
   }
 
+  getServer() {
+    return this.wsServer;
+  }
+
   /**
    * @param {String} text
    * @param {Ticker} ticker
