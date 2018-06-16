@@ -24,13 +24,13 @@ class WsChannel extends NotificationChannel {
   /**
    * @param {String} text
    * @param {Ticker} ticker
-   * @param {Any} data
+   * @param {Any} module
    */
-  send({ text, ticker, data }) {
+  send({ text, ticker, module }) {
     const tickerRecord = ticker.toRecord();
-    let dataRecord = data;
-    if (typeof data.toRecord === 'function') {
-      dataRecord = data.toRecord();
+    let moduleRecord = module;
+    if (typeof module.toRecord === 'function') {
+      moduleRecord = module.toRecord();
     }
     this.wsServer.clients.forEach((client) => {
       if (client.readyState === Constants.ws.readyStates.OPEN) {
@@ -38,7 +38,7 @@ class WsChannel extends NotificationChannel {
           JSON.stringify({
             text,
             ticker: tickerRecord,
-            data: dataRecord,
+            module: moduleRecord,
           })
         );
       }
