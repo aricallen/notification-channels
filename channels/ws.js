@@ -6,7 +6,7 @@ const NotificationChannel = require('../index.js');
 const { WS_USERNAME, WS_PASSWORD } = process.env;
 
 class WsChannel extends NotificationChannel {
-  constructor({ server }) {
+  constructor({ server, username = WS_USERNAME, password = WS_PASSWORD }) {
     super();
     this.wsServer = new WebSocket.Server({
       verifyClient: this.verifyClient,
@@ -15,6 +15,10 @@ class WsChannel extends NotificationChannel {
     this.wsServer.on('connection', this.onConnection.bind(this));
     this.wsServer.on('error', this.onError.bind(this));
     this.wsServer.on('listening', this.onListening.bind(this));
+
+    // simple auth
+    this.username = username;
+    this.password = password;
   }
 
   /**
@@ -77,7 +81,7 @@ class WsChannel extends NotificationChannel {
 
     const { username, password } = JSON.parse(req.headers.authorization);
 
-    if (username === WS_USERNAME && password === WS_PASSWORD) {
+    if (username === this.username && password === this.password) {
       console.log(`'${clientUrl}' authenticated successfully`);
       return true;
     }
