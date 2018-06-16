@@ -27,7 +27,10 @@ class WsChannel extends NotificationChannel {
    * @param {Any} module
    */
   send({ text, ticker, module }) {
-    const tickerRecord = ticker.toRecord();
+    let tickerRecord = ticker;
+    if (typeof ticker.toRecord === 'function') {
+      tickerRecord = ticker.toRecord();
+    }
     let moduleRecord = module;
     if (typeof module.toRecord === 'function') {
       moduleRecord = module.toRecord();
