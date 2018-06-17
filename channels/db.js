@@ -2,13 +2,13 @@ require('dotenv').config();
 const { getClient } = require('@solstice.sebastian/db-client');
 const NotificationChannel = require('../index.js');
 
-const { DB_NAME, NOTIFICATION_DB_NAME } = process.env;
+const { DB_NAME, COLLECTION_NAME } = process.env;
 
 class DbChannel extends NotificationChannel {
-  constructor() {
-    super();
-    this.dbName = DB_NAME;
-    this.collectionName = NOTIFICATION_DB_NAME || 'notification_logs';
+  constructor({ dbName = DB_NAME, collectionName = COLLECTION_NAME }) {
+    super({ dbName, collectionName });
+    this.dbName = dbName;
+    this.collectionName = collectionName || 'notification_logs';
   }
 
   /**
