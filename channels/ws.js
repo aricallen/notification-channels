@@ -6,7 +6,7 @@ const NotificationChannel = require('../index.js');
 const { WS_USERNAME, WS_PASSWORD } = process.env;
 
 class WsChannel extends NotificationChannel {
-  constructor({ server, username = WS_USERNAME, password = WS_PASSWORD }) {
+  constructor({ server }) {
     super();
     this.wsServer = new WebSocket.Server({
       verifyClient: this.verifyClient,

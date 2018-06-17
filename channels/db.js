@@ -11,19 +11,34 @@ class DbChannel extends NotificationChannel {
     this.collectionName = NOTIFICATION_DB_NAME || 'notification_logs';
   }
 
+  /**
+   * @return {Promise} Mongo.Db
+   */
   async getDb() {
     const client = await getClient();
     const db = client.db(this.dbName);
     return db.collection(this.collectionName);
   }
 
-  async send({ ticker, analytic }) {
+  /**
+   * @param {Ticker} ticker
+   * @param {String} text
+   * @param {Any} module
+   * @return {Promise<MongoClient>}
+   */
+  async send({ ticker, module }) {
     const db = await this.getDb();
-    const tickerRecord = ticker.toRecord();
-    const analyticRecord = await analytic.toRecord();
+    let tickerRecord = ticker;
+    if (typeof ticker.toRecord === 'function') {
+      tickerRecord = ticker.toRecord();
+    }
+    let moduleRecord = module;
+    if (typeof module.toRecord === 'function') {
+      moduleRecord = module.toRecord();
+    }
     return db.insertOne({
       ...tickerRecord,
-      ...analyticRecord,
+      ...moduleRecord,
     });
   }
 }
