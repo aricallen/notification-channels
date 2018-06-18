@@ -36,10 +36,11 @@ class DbChannel extends NotificationChannel {
     if (typeof module.toRecord === 'function') {
       moduleRecord = module.toRecord();
     }
-    return db.insertOne({
-      ...tickerRecord,
+    const record = {
       ...moduleRecord,
-    });
+      ...tickerRecord,
+    };
+    return db.insertOne(record);
   }
 }
 
