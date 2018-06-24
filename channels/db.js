@@ -5,7 +5,7 @@ const NotificationChannel = require('../index.js');
 const { DB_NAME, COLLECTION_NAME } = process.env;
 
 class DbChannel extends NotificationChannel {
-  constructor({ dbName = DB_NAME, collectionName = COLLECTION_NAME }) {
+  constructor({ dbName = DB_NAME, collectionName = COLLECTION_NAME } = {}) {
     super({ dbName, collectionName });
     this.dbName = dbName;
     this.collectionName = collectionName || 'notification_logs';
