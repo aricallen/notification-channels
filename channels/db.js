@@ -26,7 +26,7 @@ class DbChannel extends NotificationChannel {
    * @param {Any} module
    * @return {Promise<MongoClient>}
    */
-  async send({ ticker, module }) {
+  async send({ ticker = {}, module = {} }) {
     const db = await this.getDb();
     let tickerRecord = ticker;
     if (typeof ticker.toRecord === 'function') {
