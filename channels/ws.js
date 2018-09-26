@@ -58,7 +58,7 @@ class WsChannel extends NotificationChannel {
     console.log('new connection');
   }
 
-  onError({ error }) {
+  onError(error) {
     console.log(`error:`, error.name);
     console.log(`stack:`, error.stack);
     throw error;
