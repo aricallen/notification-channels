@@ -1,4 +1,3 @@
-require('dotenv').config();
 const twilio = require('twilio');
 const NotificationChannel = require('../index.js');
 

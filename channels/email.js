@@ -1,4 +1,3 @@
-require('dotenv').config();
 const NotificationChannel = require('../index.js');
 const Emailer = require('@solstice.sebastian/emailer');
 

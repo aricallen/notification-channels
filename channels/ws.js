@@ -1,4 +1,3 @@
-require('dotenv').config();
 const Constants = require('@solstice.sebastian/constants');
 const WebSocket = require('ws');
 const NotificationChannel = require('../index.js');
