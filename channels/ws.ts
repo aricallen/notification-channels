@@ -1,12 +1,34 @@
 const Constants = require('@solstice.sebastian/constants');
-const WebSocket = require('ws');
-const NotificationChannel = require('../index.js');
+import WebSocket, { AddressInfo } from 'ws';
+import { NotificationChannel, SendArgs } from '../index';
+import http from 'http';
 
 const { WS_USERNAME, WS_PASSWORD } = process.env;
 
-class WsChannel extends NotificationChannel {
-  constructor({ server }) {
-    super();
+interface info {
+  origin: string;
+  req: http.IncomingMessage;
+}
+
+interface WsChannel {
+  wsServer: WebSocket.Server;
+  getServer(): WebSocket.Server;
+  onConnection(): void;
+  onListening(): void;
+  onError(event: any): void;
+}
+
+interface Recordable {
+  toRecord: () => any;
+}
+
+interface WsSendArgs extends SendArgs {
+  data: Recordable;
+  ticker: Recordable;
+}
+
+class WsChannel implements NotificationChannel {
+  constructor({ server }: { server: any }) {
     this.wsServer = new WebSocket.Server({
       verifyClient: this.verifyClient,
       server,
@@ -20,52 +42,35 @@ class WsChannel extends NotificationChannel {
     return this.wsServer;
   }
 
-  /**
-   * @param {String} text
-   * @param {Ticker} ticker
-   * @param {Any} module
-   */
-  send({ text, ticker, module }) {
-    let tickerRecord = ticker;
-    if (typeof ticker.toRecord === 'function') {
-      tickerRecord = ticker.toRecord();
-    }
-    let moduleRecord = module;
-    if (typeof module.toRecord === 'function') {
-      moduleRecord = module.toRecord();
-    }
+  send({ text, ticker, data }: WsSendArgs): void {
     this.wsServer.clients.forEach((client) => {
       if (client.readyState === Constants.ws.readyStates.OPEN) {
         client.send(
           JSON.stringify({
             text,
-            ticker: tickerRecord,
-            module: moduleRecord,
+            ticker: ticker.toRecord(),
+            data: data.toRecord(),
           })
         );
       }
     });
   }
 
-  /**
-   * @param {Socket} socket
-   * @param {Request} request
-   */
   onConnection() {
     // console.log(`socket:`, socket);
     // console.log(`req:`, req);
     console.log('new connection');
   }
 
-  onError(error) {
-    console.log(`error:`, error.name);
-    console.log(`stack:`, error.stack);
-    throw error;
+  onError(event: any): void {
+    console.log(`error:`, event.name);
+    console.log(`stack:`, event.stack);
+    throw event.error;
   }
 
   onListening() {
-    const { address, family, port } = this.wsServer.address();
-    console.log(`wsServer listening at '${address}' on port '${port}' with family '${family}'`);
+    const addressInfo: AddressInfo = this.wsServer.address() as AddressInfo;
+    console.log(`wsServer listening at '${addressInfo.address}' on port '${addressInfo.port}' with family '${addressInfo.family}'`);
   }
 
   /**
@@ -73,7 +78,7 @@ class WsChannel extends NotificationChannel {
    * @param {Request} req
    * @param {Boolean} secure
    */
-  verifyClient({ origin, req }) {
+  verifyClient({ origin, req }: info) {
     let clientUrl;
     if (origin === undefined) {
       clientUrl = req.headers.host;
@@ -81,7 +86,7 @@ class WsChannel extends NotificationChannel {
       clientUrl = origin;
     }
 
-    const { username, password } = JSON.parse(req.headers.authorization);
+    const { username, password } = JSON.parse(req.headers.authorization!);
 
     if (username === WS_USERNAME && password === WS_PASSWORD) {
       console.log(`'${clientUrl}' authenticated successfully`);

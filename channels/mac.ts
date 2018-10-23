@@ -1,13 +1,20 @@
 const { NotificationCenter } = require('node-notifier');
-const NotificationChannel = require('../index.js');
+import { NotificationChannel, SendArgs } from '../index';
 
-class MacChannel extends NotificationChannel {
+interface MacChannel {
+  notifier: any;
+}
+
+interface MacSendArgs extends SendArgs {
+  text: string;
+}
+
+class MacChannel implements NotificationChannel {
   constructor() {
-    super();
     this.notifier = new NotificationCenter();
   }
 
-  send({ text }) {
+  send({ text }: MacSendArgs): Promise<any> {
     const textParts = text.split('\n');
     return new Promise((res, rej) => {
       this.notifier.notify(
@@ -19,7 +26,7 @@ class MacChannel extends NotificationChannel {
           wait: true,
           timeout: 15,
         },
-        (err, response) => {
+        (err: Error, response: any) => {
           if (err) {
             return rej(err);
           }

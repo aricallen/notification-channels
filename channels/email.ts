@@ -1,4 +1,4 @@
-const NotificationChannel = require('../index.js');
+import { NotificationChannel, SendArgs } from '../index';
 const Emailer = require('@solstice.sebastian/emailer');
 
 const u = process.env.EMAIL_USERNAME;
@@ -6,16 +6,26 @@ const p = process.env.EMAIL_PASSWORD;
 const h = process.env.EMAIL_HOST;
 const r = process.env.EMAIL_RECIPIENT;
 
-class Email extends NotificationChannel {
+interface EmailSendArgs extends SendArgs {
+  text: string;
+}
+
+interface Email {
+  username?: string;
+  password?: string;
+  host?: string;
+  recipient?: string;
+}
+
+class Email implements NotificationChannel {
   constructor({ username = u, password = p, host = h, recipient = r } = {}) {
-    super();
     this.username = username;
     this.password = password;
     this.host = host;
     this.recipient = recipient;
   }
 
-  send({ text }) {
+  async send({ text }: EmailSendArgs): Promise<any> {
     const subject = text.split('\n')[0];
     const emailer = Emailer({ username: this.username, password: this.password, host: this.host });
     emailer.setFrom('mi-oyente@gmail.com');

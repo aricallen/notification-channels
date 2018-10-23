@@ -1,11 +1,18 @@
+import { NotificationChannel, SendArgs } from '../index';
 const twilio = require('twilio');
-const NotificationChannel = require('../index.js');
 
 const { TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TEXT_RECIPIENT, TWILIO_NUMBER } = process.env;
 
-class Text extends NotificationChannel {
+interface Text {
+  client: any;
+}
+
+interface TextSendArgs extends SendArgs {
+  text: string;
+}
+
+class Text implements NotificationChannel {
   constructor() {
-    super();
     this.client = twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
   }
 
@@ -13,7 +20,7 @@ class Text extends NotificationChannel {
    * @param {String} text
    * @return {Promise}
    */
-  send({ text }) {
+  send({ text }: TextSendArgs): any {
     return this.client.messages.create({
       body: text,
       from: TWILIO_NUMBER,
