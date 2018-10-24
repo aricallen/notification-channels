@@ -3,15 +3,14 @@ const twilio = require('twilio');
 
 const { TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TEXT_RECIPIENT, TWILIO_NUMBER } = process.env;
 
-interface Text {
-  client: any;
-}
-
 interface TextSendArgs extends SendArgs {
   text: string;
 }
 
-class Text implements NotificationChannel {
+class TextChannel implements NotificationChannel {
+  client: any;
+  name = 'text';
+
   constructor() {
     this.client = twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
   }
@@ -29,4 +28,4 @@ class Text implements NotificationChannel {
   }
 }
 
-module.exports = Text;
+export { TextChannel };

@@ -1,15 +1,14 @@
 const { NotificationCenter } = require('node-notifier');
 import { NotificationChannel, SendArgs } from '../index';
 
-interface MacChannel {
-  notifier: any;
-}
-
 interface MacSendArgs extends SendArgs {
   text: string;
 }
 
 class MacChannel implements NotificationChannel {
+  notifier: any;
+  name = 'mac';
+
   constructor() {
     this.notifier = new NotificationCenter();
   }
@@ -37,4 +36,4 @@ class MacChannel implements NotificationChannel {
   }
 }
 
-module.exports = MacChannel;
+export { MacChannel };

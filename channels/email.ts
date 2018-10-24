@@ -1,24 +1,30 @@
 import { NotificationChannel, SendArgs } from '../index';
 const Emailer = require('@solstice.sebastian/emailer');
 
-const u = process.env.EMAIL_USERNAME;
-const p = process.env.EMAIL_PASSWORD;
-const h = process.env.EMAIL_HOST;
-const r = process.env.EMAIL_RECIPIENT;
+const u = process.env.EMAIL_USERNAME as string;
+const p = process.env.EMAIL_PASSWORD as string;
+const h = process.env.EMAIL_HOST as string;
+const r = process.env.EMAIL_RECIPIENT as string;
 
 interface EmailSendArgs extends SendArgs {
   text: string;
 }
 
-interface Email {
+interface ChannelConfig {
   username?: string;
   password?: string;
   host?: string;
   recipient?: string;
 }
 
-class Email implements NotificationChannel {
-  constructor({ username = u, password = p, host = h, recipient = r } = {}) {
+class EmailChannel implements NotificationChannel {
+  username: string;
+  password: string;
+  host: string;
+  recipient: string;
+  name = 'email';
+
+  constructor({ username = u, password = p, host = h, recipient = r }: ChannelConfig) {
     this.username = username;
     this.password = password;
     this.host = host;
@@ -35,4 +41,4 @@ class Email implements NotificationChannel {
   }
 }
 
-module.exports = Email;
+export { EmailChannel };

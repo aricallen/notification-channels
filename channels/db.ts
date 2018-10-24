@@ -2,7 +2,7 @@ import { NotificationChannel, SendArgs } from '../index';
 import { getClient } from '@solstice.sebastian/db-client';
 import { Collection, InsertOneWriteOpResult } from 'mongodb';
 
-interface DbChannel {
+interface DbChannel extends NotificationChannel {
   dbName: string;
   collectionName: string;
   mongoUrl: string;
@@ -22,6 +22,7 @@ class DbChannel implements NotificationChannel {
     this.dbName = dbName;
     this.collectionName = collectionName;
     this.mongoUrl = mongoUrl;
+    this.name = 'db';
   }
 
   /**
@@ -44,4 +45,4 @@ class DbChannel implements NotificationChannel {
   }
 }
 
-module.exports = DbChannel;
+export { DbChannel };

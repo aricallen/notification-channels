@@ -10,14 +10,6 @@ interface info {
   req: http.IncomingMessage;
 }
 
-interface WsChannel {
-  wsServer: WebSocket.Server;
-  getServer(): WebSocket.Server;
-  onConnection(): void;
-  onListening(): void;
-  onError(event: any): void;
-}
-
 interface Recordable {
   toRecord: () => any;
 }
@@ -28,6 +20,9 @@ interface WsSendArgs extends SendArgs {
 }
 
 class WsChannel implements NotificationChannel {
+  wsServer: WebSocket.Server;
+  name = 'ws';
+
   constructor({ server }: { server: any }) {
     this.wsServer = new WebSocket.Server({
       verifyClient: this.verifyClient,
@@ -96,4 +91,4 @@ class WsChannel implements NotificationChannel {
   }
 }
 
-module.exports = WsChannel;
+export { WsChannel };

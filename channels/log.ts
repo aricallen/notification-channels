@@ -1,7 +1,7 @@
 import { NotificationChannel, SendArgs } from '../index';
 const Logger = require('@solstice.sebastian/logger');
 
-interface LogChannel {
+interface ChannelConfig {
   path?: string;
   logger: any;
 }
@@ -11,7 +11,11 @@ interface LogSendArgs extends SendArgs {
 }
 
 class LogChannel implements NotificationChannel {
-  constructor({ path = 'notifications.log' }: LogChannel) {
+  path: string;
+  logger: any;
+  name = 'log';
+
+  constructor({ path = 'notifications.log' }: ChannelConfig) {
     this.path = path;
     this.logger = Logger({ path });
   }
@@ -23,4 +27,4 @@ class LogChannel implements NotificationChannel {
   }
 }
 
-module.exports = LogChannel;
+export { LogChannel };
