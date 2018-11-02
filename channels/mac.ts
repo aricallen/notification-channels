@@ -1,5 +1,6 @@
-const { NotificationCenter } = require('node-notifier');
+import { NotificationChannelTypes } from '@solstice.sebastian/constants';
 import { NotificationChannel, SendArgs } from '../index';
+const { NotificationCenter } = require('node-notifier');
 
 interface MacSendArgs extends SendArgs {
   text: string;
@@ -7,7 +8,7 @@ interface MacSendArgs extends SendArgs {
 
 class MacChannel implements NotificationChannel {
   notifier: any;
-  name = 'mac';
+  type = NotificationChannelTypes.MAC;
 
   constructor() {
     this.notifier = new NotificationCenter();

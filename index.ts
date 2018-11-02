@@ -5,7 +5,7 @@ export type SendArgs = {
 }
 
 export interface NotificationChannel {
-  name: string;
+  type: string;
   send({ text, data, ticker }: SendArgs): any | Promise<any>;
 }
 

@@ -5,6 +5,7 @@
     "lib": ["es2015", "esnext"],
     "importHelpers": true,
     "moduleResolution": "node",
+    "preserveConstEnums": true,
     "declaration": true,
     "declarationMap": true,
     "outDir": "./dist",

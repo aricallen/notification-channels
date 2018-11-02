@@ -1,4 +1,4 @@
-const Constants = require('@solstice.sebastian/constants');
+import { ReadyStates, NotificationChannelTypes } from '@solstice.sebastian/constants';
 import WebSocket, { AddressInfo } from 'ws';
 import { NotificationChannel, SendArgs } from '../index';
 import http from 'http';
@@ -21,7 +21,7 @@ interface WsSendArgs extends SendArgs {
 
 class WsChannel implements NotificationChannel {
   wsServer: WebSocket.Server;
-  name = 'ws';
+  type = NotificationChannelTypes.WEB_SOCKET;
 
   constructor({ server }: { server: any }) {
     this.wsServer = new WebSocket.Server({
@@ -39,7 +39,7 @@ class WsChannel implements NotificationChannel {
 
   send({ text, ticker, data }: WsSendArgs): void {
     this.wsServer.clients.forEach((client) => {
-      if (client.readyState === Constants.ws.readyStates.OPEN) {
+      if (client.readyState === ReadyStates.OPEN) {
         client.send(
           JSON.stringify({
             text,
