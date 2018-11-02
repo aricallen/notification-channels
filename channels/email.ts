@@ -1,4 +1,4 @@
-import { NotificationChannelTypes } from '@solstice.sebastian/constants';
+import { NotificationChannelType } from '@solstice.sebastian/constants';
 import { NotificationChannel, SendArgs } from '../index';
 const Emailer = require('@solstice.sebastian/emailer');
 
@@ -23,7 +23,7 @@ class EmailChannel implements NotificationChannel {
   password: string;
   host: string;
   recipient: string;
-  type = NotificationChannelTypes.EMAIL;
+  type = NotificationChannelType.EMAIL;
 
   constructor({ username = u, password = p, host = h, recipient = r }: ChannelConfig) {
     this.username = username;

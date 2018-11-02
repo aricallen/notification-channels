@@ -36,7 +36,7 @@
   "author": "solstice.sebastian",
   "license": "MIT",
   "dependencies": {
-    "@solstice.sebastian/constants": "latest",
+    "@solstice.sebastian/constants": "^3.1.0",
     "@solstice.sebastian/db-client": "^1.0.0",
     "@solstice.sebastian/emailer": "^1.0.0",
     "@solstice.sebastian/logger": "^0.0.2",

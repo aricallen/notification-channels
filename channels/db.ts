@@ -1,4 +1,4 @@
-import { NotificationChannelTypes } from '@solstice.sebastian/constants';
+import { NotificationChannelType } from '@solstice.sebastian/constants';
 import { getClient } from '@solstice.sebastian/db-client';
 import { Collection, InsertOneWriteOpResult } from 'mongodb';
 import { NotificationChannel, SendArgs } from '../index';
@@ -23,7 +23,7 @@ class DbChannel implements NotificationChannel {
     this.dbName = dbName;
     this.collectionName = collectionName;
     this.mongoUrl = mongoUrl;
-    this.type = NotificationChannelTypes.DATABASE;
+    this.type = NotificationChannelType.DATABASE;
   }
 
   /**

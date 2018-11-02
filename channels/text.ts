@@ -1,4 +1,4 @@
-import { NotificationChannelTypes } from '@solstice.sebastian/constants';
+import { NotificationChannelType } from '@solstice.sebastian/constants';
 import { NotificationChannel, SendArgs } from '../index';
 const twilio = require('twilio');
 
@@ -10,7 +10,7 @@ interface TextSendArgs extends SendArgs {
 
 class TextChannel implements NotificationChannel {
   client: any;
-  type = NotificationChannelTypes.TEXT;
+  type = NotificationChannelType.TEXT;
 
   constructor() {
     this.client = twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
