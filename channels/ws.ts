@@ -2,6 +2,7 @@ import { ReadyState, NotificationChannelType } from '@solstice.sebastian/constan
 import WebSocket, { AddressInfo } from 'ws';
 import { NotificationChannel, SendArgs } from '../index';
 import http from 'http';
+const { msToDatetime } = require('@solstice.sebastian/helpers')();
 
 const { WS_USERNAME, WS_PASSWORD } = process.env;
 
@@ -54,7 +55,8 @@ class WsChannel implements NotificationChannel {
   onConnection() {
     // console.log(`socket:`, socket);
     // console.log(`req:`, req);
-    console.log('new connection');
+    console.log(`new connection @ ${msToDatetime(Date.now())}`);
+    console.log(`total clients = ${this.wsServer.clients.size}`);
   }
 
   onError(event: any): void {
@@ -84,7 +86,8 @@ class WsChannel implements NotificationChannel {
     const { username, password } = JSON.parse(req.headers.authorization!);
 
     if (username === WS_USERNAME && password === WS_PASSWORD) {
-      console.log(`'${clientUrl}' authenticated successfully`);
+      console.log(`'${clientUrl}' authenticated successfully @ ${msToDatetime(Date.now())}`);
+      console.log(`total clients verified = ${this.wsServer.clients.size}`);
       return true;
     }
     return false;
