@@ -87,7 +87,6 @@ class WsChannel implements NotificationChannel {
 
     if (username === WS_USERNAME && password === WS_PASSWORD) {
       console.log(`'${clientUrl}' authenticated successfully @ ${msToDatetime(Date.now())}`);
-      console.log(`total clients verified = ${this.wsServer.clients.size}`);
       return true;
     }
     return false;
