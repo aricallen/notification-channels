@@ -1,4 +1,4 @@
-import { ReadyState, NotificationChannelType } from '@solstice.sebastian/constants';
+import { ReadyState, NotificationChannelType, BotAction } from '@solstice.sebastian/constants';
 import WebSocket, { AddressInfo } from 'ws';
 import { NotificationChannel, SendArgs } from '../index';
 import http from 'http';
@@ -16,8 +16,9 @@ interface Recordable {
 }
 
 interface WsSendArgs extends SendArgs {
-  data: Recordable;
-  ticker: Recordable;
+  data?: Recordable;
+  ticker?: Recordable;
+  action?: BotAction;
 }
 
 class WsChannel implements NotificationChannel {
@@ -38,14 +39,15 @@ class WsChannel implements NotificationChannel {
     return this.wsServer;
   }
 
-  send({ text, ticker, data }: WsSendArgs): void {
+  send({ text, ticker, data, action }: WsSendArgs): void {
     this.wsServer.clients.forEach((client) => {
       if (client.readyState === ReadyState.OPEN) {
         client.send(
           JSON.stringify({
             text,
-            ticker: ticker.toRecord(),
-            data: data.toRecord(),
+            ticker: ticker ? ticker.toRecord() : null,
+            data: data ? data.toRecord() : null,
+            action,
           })
         );
       }

@@ -36,9 +36,9 @@
   integrity sha512-RYAVkhBqLq7YNqLpWojzOkyg0DU9aePF/j+3j4iWBGtmVF5Ayx24gjj1Wt6iOVss0+xPTz7k9+L5SLafpQzIZQ==
 
 "@solstice.sebastian/constants@^3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@solstice.sebastian/constants/-/constants-3.1.0.tgz#b9be590813702996ec43dd7765dbd151f9c4e0d7"
-  integrity sha512-BAjmKe4WJMwpnLGXUaT4+mBv3QdoVcrRwyjjZhePoHhU7h5+xnXh2GmkVgkwN8s9DypENj3svuNydg7Buqhm9g==
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/@solstice.sebastian/constants/-/constants-3.2.1.tgz#054ffd8b179417cbdebb13a594c04349bfc49fc4"
+  integrity sha512-CSPtIB74arU4OnGtiE35Gvvzz4Gii8oD6LpcEwI0oQX/epSogwN2CLlgeS+LtZp2mx2D4xwQHeUNRJpcHGIIMA==
   dependencies:
     typescript "^3.1.6"
 
