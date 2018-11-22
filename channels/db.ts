@@ -9,13 +9,9 @@ interface DbChannel extends NotificationChannel {
   mongoUrl: string;
 }
 
-interface Recordable {
-  toRecord: () => any;
-}
-
 interface DbSendArgs extends SendArgs {
-  data: Recordable;
-  ticker: Recordable;
+  data: any;
+  ticker: any;
 }
 
 class DbChannel implements NotificationChannel {
@@ -39,8 +35,8 @@ class DbChannel implements NotificationChannel {
   async send({ ticker, data }: DbSendArgs): Promise<InsertOneWriteOpResult> {
     const collection = await this.getCollection();
     const record = {
-      ...data.toRecord(),
-      ...ticker.toRecord(),
+      ...data,
+      ...ticker,
     };
     return collection.insertOne(record);
   }
