@@ -45,8 +45,8 @@ class WsChannel implements NotificationChannel {
         client.send(
           JSON.stringify({
             text,
-            ticker: ticker ? ticker.toRecord() : null,
-            data: data ? data.toRecord() : null,
+            ticker,
+            data,
             action,
           })
         );
