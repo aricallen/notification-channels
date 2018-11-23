@@ -2,7 +2,7 @@ import { ReadyState, NotificationChannelType, BotAction } from '@solstice.sebast
 import WebSocket, { AddressInfo } from 'ws';
 import { NotificationChannel, SendArgs } from '../index';
 import http from 'http';
-const { msToDatetime } = require('@solstice.sebastian/helpers')();
+import { msToDatetime } from '@solstice.sebastian/helpers';
 
 const { WS_USERNAME, WS_PASSWORD } = process.env;
 
