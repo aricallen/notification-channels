@@ -25,11 +25,6 @@
   dependencies:
     regenerator-runtime "^0.12.0"
 
-"@solstice.sebastian/constants@^1.0.0":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@solstice.sebastian/constants/-/constants-1.1.4.tgz#1619dca5729a91aa43e21deaaf4b6aab14121a85"
-  integrity sha512-jf/88swPblbPaRMKK1hw4rLwM7Ov3OOG/PzZ0yZmtYfb4PPvhTuSJCet4TWKyPVDfl2zMdNg8Y9Mm8qIfCetSw==
-
 "@solstice.sebastian/constants@^3.1.0", "@solstice.sebastian/constants@^3.2.3", "@solstice.sebastian/constants@latest":
   version "3.2.5"
   resolved "https://registry.yarnpkg.com/@solstice.sebastian/constants/-/constants-3.2.5.tgz#522f2febc7e3adcffa1c8c06e8cfd3a21c38b82c"
@@ -49,11 +44,11 @@
     mongodb-memory-server "^2.6.2"
 
 "@solstice.sebastian/emailer@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@solstice.sebastian/emailer/-/emailer-1.0.0.tgz#1e9d475bad36d01e664d8b324fe0ff9be3b9e9b6"
-  integrity sha1-Hp1HW6020B5mTYsyT+D/m+O56bY=
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@solstice.sebastian/emailer/-/emailer-1.0.1.tgz#1a308be5518878a0b08003e123fa2edb1ab18d8b"
+  integrity sha512-QJKKY+Xaljxxtlpl83tDtECTLVvdGm2iHndKh8bjSwPHs71S7SPIuj7SVrf/qW6J1V3LGGeIcv03Pe4a3o/GHA==
   dependencies:
-    "@solstice.sebastian/helpers" "^1.1.0"
+    "@solstice.sebastian/helpers" "^2.0.0"
     emailjs "^2.0.0"
 
 "@solstice.sebastian/helpers@^1.0.0":
@@ -86,16 +81,35 @@
     tslib "^1.9.3"
     typescript "^3.1.6"
 
-"@solstice.sebastian/helpers@^1.1.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@solstice.sebastian/helpers/-/helpers-1.2.0.tgz#97e0cab0aaa0d23ff402beaea6cb8873e6e861d4"
-  integrity sha512-Wzp0RDNPJ21cliZ2tCYnIUh0CygBM3X1tlK9eateXdeOdG+iLoYBV1iEdCZeQosAqlUQaJQvtDoq895LDYcNKA==
+"@solstice.sebastian/helpers@^2.0.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@solstice.sebastian/helpers/-/helpers-2.1.0.tgz#d0acbf20e654cfe927b76cd9e6e011103a0c2a32"
+  integrity sha512-MxrTVUccbydUbFpdYPLytTcxxo0AXs0koCom1u/RNFaxHEdZreiyqp0gvdBVLSCazB01AQ+uy998DlGu18dHgw==
   dependencies:
-    "@solstice.sebastian/constants" "^1.0.0"
-    glob "^7.1.2"
+    "@solstice.sebastian/constants" "^3.2.3"
+    "@types/glob" "^7.1.1"
+    "@types/moment-timezone" "^0.5.9"
+    "@types/node" "^10.12.9"
+    eslint "^5.9.0"
+    eslint-config-airbnb-base "^13.1.0"
+    eslint-config-prettier "^3.3.0"
+    eslint-config-standard "^12.0.0"
+    eslint-plugin-import "^2.14.0"
+    eslint-plugin-node "^8.0.0"
+    eslint-plugin-prettier "^3.0.0"
+    eslint-plugin-promise "^4.0.1"
+    eslint-plugin-standard "^4.0.0"
+    faucet "^0.0.1"
+    glob "^7.1.3"
+    husky "^1.1.4"
     moment "^2.22.1"
-    moment-timezone "^0.5.21"
-    tape "^4.9.0"
+    moment-timezone "^0.5.23"
+    nodemon "^1.18.6"
+    prettier "^1.15.2"
+    tape "^4.9.1"
+    tape-watch "^2.3.0"
+    tslib "^1.9.3"
+    typescript "^3.1.6"
 
 "@solstice.sebastian/logger@^0.0.2":
   version "0.0.2"
@@ -2959,7 +2973,7 @@ mkdirp@^0.5.0, mkdirp@^0.5.1:
   dependencies:
     minimist "0.0.8"
 
-moment-timezone@^0.5.21, moment-timezone@^0.5.23:
+moment-timezone@^0.5.23:
   version "0.5.23"
   resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.23.tgz#7cbb00db2c14c71b19303cb47b0fb0a6d8651463"
   integrity sha512-WHFH85DkCfiNMDX5D3X7hpNH3/PUhjTGcD0U1SgfBGZxJ3qUmJh5FdvaFjcClxOvB3rzdfj4oRffbI38jEnC1w==
@@ -4338,7 +4352,7 @@ tape-watch@*, tape-watch@^2.3.0:
     outpipe "1.1.1"
     simpler-debounce "1.0.0"
 
-tape@*, tape@^4.9.0, tape@^4.9.1:
+tape@*, tape@^4.9.1:
   version "4.9.1"
   resolved "https://registry.yarnpkg.com/tape/-/tape-4.9.1.tgz#1173d7337e040c76fbf42ec86fcabedc9b3805c9"
   integrity sha512-6fKIXknLpoe/Jp4rzHKFPpJUHDHDqn8jus99IfPnHIjyz78HYlefTGD3b5EkbQzuLfaEvmfPK3IolLgq2xT3kw==
