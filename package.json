@@ -1,6 +1,6 @@
 {
   "name": "@solstice.sebastian/notification-channels",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
