@@ -1,6 +1,6 @@
 {
   "name": "@solstice.sebastian/notification-channels",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -25,7 +25,6 @@
     "eslint-plugin-standard": "*",
     "faucet": "*",
     "husky": "^1.1.2",
-    "nodemon": "*",
     "prettier": "*",
     "tape": "*",
     "tape-watch": "*",
