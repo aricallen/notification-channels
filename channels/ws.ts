@@ -39,17 +39,10 @@ class WsChannel implements NotificationChannel {
     return this.wsServer;
   }
 
-  send({ text, ticker, data, action }: WsSendArgs): void {
+  send(data: any): void {
     this.wsServer.clients.forEach((client) => {
       if (client.readyState === ReadyState.OPEN) {
-        client.send(
-          JSON.stringify({
-            text,
-            ticker,
-            data,
-            action,
-          })
-        );
+        client.send(JSON.stringify(data));
       }
     });
   }
