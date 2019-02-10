@@ -15,22 +15,16 @@ interface Recordable {
   toRecord: () => any;
 }
 
-interface WsSendArgs extends SendArgs {
-  data?: Recordable;
-  ticker?: Recordable;
-  action?: BotAction;
-}
-
 class WsChannel implements NotificationChannel {
   wsServer: WebSocket.Server;
   type = NotificationChannelType.WEB_SOCKET;
 
-  constructor({ server }: { server: any }) {
+  constructor({ server, onConnection }: { server: any, onConnection: () => void }) {
     this.wsServer = new WebSocket.Server({
       verifyClient: this.verifyClient,
       server,
     });
-    this.wsServer.on('connection', this.onConnection.bind(this));
+    this.wsServer.on('connection', onConnection || this.onConnection.bind(this));
     this.wsServer.on('error', this.onError.bind(this));
     this.wsServer.on('listening', this.onListening.bind(this));
   }
