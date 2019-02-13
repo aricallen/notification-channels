@@ -19,12 +19,12 @@ class WsChannel implements NotificationChannel {
   wsServer: WebSocket.Server;
   type = NotificationChannelType.WEB_SOCKET;
 
-  constructor({ server, onConnection }: { server: any, onConnection: () => void }) {
+  constructor({ server, onConnection }: { server: any, onConnection: (channel: WsChannel) => void }) {
     this.wsServer = new WebSocket.Server({
       verifyClient: this.verifyClient,
       server,
     });
-    this.wsServer.on('connection', onConnection || this.onConnection.bind(this));
+    this.wsServer.on('connection', onConnection ? () => onConnection.bind(this) : this.onConnection.bind(this));
     this.wsServer.on('error', this.onError.bind(this));
     this.wsServer.on('listening', this.onListening.bind(this));
   }
