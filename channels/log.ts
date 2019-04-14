@@ -4,7 +4,7 @@ const Logger = require('@solstice.sebastian/logger');
 
 interface ChannelConfig {
   path?: string;
-  logger: any;
+  logger?: any;
 }
 
 interface LogSendArgs extends SendArgs {
@@ -16,9 +16,9 @@ class LogChannel implements NotificationChannel {
   logger: any;
   type = NotificationChannelType.LOG;
 
-  constructor({ path = 'notifications.log' }: ChannelConfig) {
-    this.path = path;
-    this.logger = Logger({ path });
+  constructor(config: ChannelConfig = {}) {
+    this.path = config.path || 'notifications.log';
+    this.logger = Logger({ path: this.path });
   }
 
   async send({ text }: LogSendArgs): Promise<void> {
