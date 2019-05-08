@@ -35,6 +35,7 @@ class WebhookChannel implements NotificationChannel {
         );
       } catch (err) {
         console.log(`error sending to ${endpoint} with error: ${JSON.stringify(err)}`);
+        throw err;
       }
     }
 
@@ -46,6 +47,7 @@ class WebhookChannel implements NotificationChannel {
         );
       } catch (err) {
         console.log(`error sending to ${request.url} with error: ${JSON.stringify(err)}`);
+        throw err;
       }
     }
   }
