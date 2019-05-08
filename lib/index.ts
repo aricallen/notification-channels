@@ -15,3 +15,4 @@ export { LogChannel } from './channels/log';
 export { MacChannel } from './channels/mac';
 export { TextChannel } from './channels/text';
 export { WsChannel } from './channels/ws';
+export { WebhookChannel } from './channels/webhook';

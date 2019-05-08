@@ -1,17 +1,19 @@
 {
   "compilerOptions": {
-    "target": "es2018",
+    "target": "es5",
     "module": "commonjs",
     "lib": ["es2015", "esnext"],
     "importHelpers": true,
     "moduleResolution": "node",
-    "preserveConstEnums": true,
     "declaration": true,
     "declarationMap": true,
     "outDir": "./dist",
-    "rootDir": "./",
+    "rootDir": "./lib",
+    "downlevelIteration": true,
     "strict": true,
     "esModuleInterop": true,
     "inlineSourceMap": true
-  }
+  },
+  "include": ["lib/**/*"],
+  "exclude": ["node_modules"]
 }
