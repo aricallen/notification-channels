@@ -15,11 +15,12 @@ interface DbSendArgs extends SendArgs {
 }
 
 class DbChannel implements NotificationChannel {
+  type = NotificationChannelType.DATABASE;
+
   constructor({ dbName = 'notifications', collectionName = 'logs', mongoUrl }: DbChannel) {
     this.dbName = dbName;
     this.collectionName = collectionName;
     this.mongoUrl = mongoUrl;
-    this.type = NotificationChannelType.DATABASE;
   }
 
   /**
